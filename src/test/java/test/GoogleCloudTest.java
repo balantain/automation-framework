@@ -12,18 +12,21 @@ import steps.FillTheFormSteps;
 
 import java.util.ArrayList;
 
-public class GoogleCloudTest {
+public class GoogleCloudTest
+{
     private WebDriver webDriver;
     private final String SEARCH_QUERY = "Google Cloud Platform Pricing Calculator";
 
     @BeforeMethod(alwaysRun = true)
-    public void openBrowser(){
+    public void openBrowser()
+    {
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
     }
 
     @Test
-    public void startingSearch() {
+    public void startingSearch()
+    {
         GoogleCloudHomePage page = new GoogleCloudHomePage(webDriver);
         GoogleCloudPlatformPricingCalculatorPage pricingCalculatorPage = page.openPage().searchForTerm(SEARCH_QUERY).openCorrespondingResult();
 
@@ -48,7 +51,8 @@ public class GoogleCloudTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void closeBrowser(){
+    public void closeBrowser()
+    {
         webDriver.quit();
         webDriver = null;
     }
