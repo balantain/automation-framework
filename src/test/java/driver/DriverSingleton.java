@@ -21,15 +21,18 @@ public class DriverSingleton
         {
             switch (System.getProperty("browser"))
             {
-                case "firefox":
+                case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                case "edge":
+                }
+                case "edge": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                default:
+                }
+                default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
+                }
             }
         }
         driver.manage().window().maximize();
