@@ -70,7 +70,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
 
     public void fillInNumberOfInstances(String numberOfInstances)
     {
-        numberOfInstancesField.sendKeys(numberOfInstances);
+        numberOfInstancesField.sendKeys(String.valueOf(numberOfInstances));
         logger.info("Input number of instances: " + numberOfInstances);
     }
 

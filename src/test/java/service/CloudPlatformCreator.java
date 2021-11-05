@@ -16,7 +16,14 @@ public class CloudPlatformCreator
 
     public static CloudPlatformModel createCloudPlatformWithCredentialsFromProperty()
     {
-        return new CloudPlatformModel(NUMBER_OF_INSTANCES, MACHINE_SERIES, MACHINE_TYPE, NUMBER_OF_GPU,
-                GPU_TYPE, LOCAL_SSD, DATA_CENTRE_LOCATION, COMMITTED_USAGE, MANUAL_CALCULATING_COST);
+        return new CloudPlatformModel(TestDataReader.getTestData(NUMBER_OF_INSTANCES),
+                TestDataReader.getTestData(MACHINE_SERIES),
+                TestDataReader.getTestData(MACHINE_TYPE),
+                TestDataReader.getTestData(NUMBER_OF_GPU),
+                TestDataReader.getTestData(GPU_TYPE),
+                TestDataReader.getTestData(LOCAL_SSD),
+                TestDataReader.getTestData(DATA_CENTRE_LOCATION),
+                TestDataReader.getTestData(COMMITTED_USAGE),
+                TestDataReader.getTestData(MANUAL_CALCULATING_COST));
     }
 }

@@ -1,5 +1,5 @@
 <suite name="All tests">
-    <test name="All tests">
+    <test name="All tests" verbose="1">
         <packages>
             <package name="test" />
         </packages>
