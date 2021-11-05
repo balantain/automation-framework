@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.XpathUtils;
@@ -18,14 +19,8 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//label[contains(text(), \"Series\")]/..//md-select-value[@class='md-select-value']")
     private WebElement seriesField;
 
-//    @FindBy(xpath = "//div[contains(text(), 'N1')]/..")
-//    private WebElement seriesSelection;
-
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//label[contains(text(), \"Machine type\")]/..//md-select-value[@class='md-select-value']")
     private WebElement machineTypeField;
-
-//    @FindBy(xpath = "//div[contains(text(), 'n1-standard-8')]")
-//    private WebElement getMachineTypeSelection;
 
     @FindBy(xpath = "//div[@class='ng-scope layout-row']//md-checkbox[@aria-label='Add GPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGPUCheckbox;
@@ -33,32 +28,17 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     @FindBy(xpath = "//md-select[@placeholder='Number of GPUs']")
     private WebElement numberOfGPUMenu;
 
-//    @FindBy(xpath = "//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '1')]/..")
-//    private WebElement numberOfGPUSelection;
-
     @FindBy(xpath = "//md-select[@placeholder='GPU type']")
     private WebElement gpuTypeMenu;
-
-//    @FindBy(xpath = "//div[contains(text(), 'NVIDIA Tesla V100')]/..")
-//    private WebElement gpuTypeSelection;
 
     @FindBy(xpath = "//md-select[@placeholder='Local SSD']")
     private WebElement localSSDMenu;
 
-//    @FindBy(xpath = "//div[contains(text(), '2x375 GB')]" )
-//    private WebElement getLocalSSDSelection;
-
     @FindBy(xpath = "//md-select[contains(@placeholder, 'Datacenter location')]")
     private WebElement datacenterLocationMenu;
 
-//    @FindBy(xpath = "//div[@class='md-select-menu-container cpc-region-select md-active md-clickable']//div[contains(text(), 'Frankfurt')]/..")
-//    private WebElement getDatacenterLocationSelection;
-
     @FindBy(xpath = "//md-select[contains(@placeholder, 'Committed usage')]")
     private WebElement committedUsageMenu;
-
-//    @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '1 Year')]/..")
-//    private WebElement getCommittedUsageSelection;
 
     @FindBy(xpath = "//div[@class='compute-engine-block']//form[@name='ComputeEngineForm']//button[contains(text(), 'Add to Estimate')]")
     private WebElement addToEstimateButton;
@@ -66,6 +46,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     public GoogleCloudPlatformPricingCalculatorPage(WebDriver driver)
     {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void fillInNumberOfInstances(String numberOfInstances)

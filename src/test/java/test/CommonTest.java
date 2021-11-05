@@ -13,7 +13,7 @@ public class CommonTest {
 
     protected final String SEARCH_QUERY = "Google Cloud Platform Pricing Calculator";
 
-    @BeforeMethod()
+    @BeforeMethod(alwaysRun = true)
     public void setupBrowser()
     {
         driver = DriverSingleton.getDriver();

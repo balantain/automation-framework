@@ -14,10 +14,9 @@ public class DriverSingleton
 
     public static WebDriver getDriver()
     {
-        //------- Тестируем пока только на Хроме
+//------- To test with Chrome on IDE
 //        WebDriverManager.chromedriver().setup();
 //        driver = new ChromeDriver();
-
         if (driver == null)
         {
             switch (System.getProperty("browser"))
