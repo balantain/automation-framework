@@ -27,8 +27,6 @@ public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest
 
         System.out.println(totalEstimatedCost);
 
-        GoogleCloudEmailEstimatePage googleCloudEmailEstimatePage = googleCloudPlatformCalculatingResultsPage.sendEstimateByEmail();
-
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.open()");
 
@@ -36,8 +34,11 @@ public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest
         driver.switchTo().window(handles.get(1));
         YopmailEmailGeneratorPage yopmailEmailGeneratorPage = new YopmailPage(driver).openPage().createEmail();
         String emailAddress = yopmailEmailGeneratorPage.getEmail();
+
         driver.switchTo().window(handles.get(0));
+        GoogleCloudEmailEstimatePage googleCloudEmailEstimatePage = googleCloudPlatformCalculatingResultsPage.sendEstimateByEmail();
         googleCloudEmailEstimatePage.sendEmail(emailAddress);
+
         driver.switchTo().window(handles.get(1));
         String result = yopmailEmailGeneratorPage.checkEmail().getResultPriceFromEmail();
         Assert.assertTrue(result.contains(totalEstimatedCost));

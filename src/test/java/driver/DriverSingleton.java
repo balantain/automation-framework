@@ -14,26 +14,31 @@ public class DriverSingleton {
 
     public static WebDriver getDriver() {
 //------- To test with Chrome on IDE
-//        WebDriverManager.chromedriver().setup();
-//        driver = new ChromeDriver();
-        if (null == driver) {
-            switch (System.getProperty("browser")) {
-                case "firefox": {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    break;
-                }
-                case "edge": {
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
-                    break;
-                }
-                default: {
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                }
-            }
-        }
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+
+//        WebDriverManager.firefoxdriver().setup();
+//        driver = new FirefoxDriver();
+
+
+//        if (null == driver) {
+//            switch (System.getProperty("browser")) {
+//                case "firefox": {
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver = new FirefoxDriver();
+//                    break;
+//                }
+//                case "edge": {
+//                    WebDriverManager.edgedriver().setup();
+//                    driver = new EdgeDriver();
+//                    break;
+//                }
+//                default: {
+//                    WebDriverManager.chromedriver().setup();
+//                    driver = new ChromeDriver();
+//                }
+//            }
+//        }
         driver.manage().window().maximize();
         return driver;
     }

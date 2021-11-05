@@ -23,17 +23,14 @@ public class GoogleCloudEmailEstimatePage extends AbstractPage {
     }
 
     public void sendEmail(String emailAddress) {
-        driver.switchTo().defaultContent();
-        driver.switchTo()
-                .frame(new WebDriverWait(driver, Duration.ofSeconds((WAITING_TIME)))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"cloud-site\"]/devsite-iframe/iframe"))));
-        driver.switchTo()
-                .frame(new WebDriverWait(driver, Duration.ofSeconds((WAITING_TIME)))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//iframe[@id=\'myFrame\']"))));
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.visibilityOf(emailAddressField)).sendKeys(emailAddress);
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.elementToBeClickable(sendEmailBtn)).click();
         logger.info("Sending email");
+    }
+
+    private void switchToFrame(){
+
     }
 }
