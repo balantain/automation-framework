@@ -25,7 +25,8 @@ public class GoogleCloudPlatformCalculatingResultsPage extends AbstractPage
 
     public String getTotalEstimatedCost()
     {
-        String totalEstimateCost = totalEstimatedCost.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
+        String totalEstimateCost = new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions.visibilityOf(totalEstimatedCost)).getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
         logger.info("Total Estimated Cost is " + totalEstimateCost);
         return totalEstimateCost;
     }
