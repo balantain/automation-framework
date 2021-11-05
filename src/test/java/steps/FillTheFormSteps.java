@@ -1,5 +1,6 @@
 package steps;
 
+import model.CloudPlatformModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ public class FillTheFormSteps
         this.page = page;
     }
 
-    public void fillTheForm(int instances)
+    public void fillTheForm(CloudPlatformModel cloudPlatformModel)
     {
         driver.switchTo()
                 .frame(new WebDriverWait(driver, Duration.ofSeconds(page.getWAITING_TIME()))
@@ -27,15 +28,18 @@ public class FillTheFormSteps
         driver.switchTo()
                 .frame(new WebDriverWait(driver, Duration.ofSeconds(page.getWAITING_TIME()))
                         .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//iframe[@id=\'myFrame\']"))));
-        page.fillInNumberOfInstances(instances);
-        page.chooseSeries();
-        page.chooseMachineType();
-        page.addGPUs();
-        page.addNumberOfGPUs();
-        page.addGPUTypes();
-        page.addLocalSSD();
-        page.addDataCenterLocation();
-        page.chooseCommittedUsage();
+        page.fillInNumberOfInstances(cloudPlatformModel.getNumberOfInstances());
+        page.chooseSeries(cloudPlatformModel.getMachineSeries());
+        page.chooseMachineType(cloudPlatformModel.getMachineType());
+        if (cloudPlatformModel.isAddGPU())
+        {
+            page.addGPUs();
+            page.addNumberOfGPUs(cloudPlatformModel.getNumberOfGPU());
+            page.addGPUType(cloudPlatformModel.getGpuType());
+        }
+        page.addLocalSSD(cloudPlatformModel.getLocalSSD());
+        page.addDataCenterLocation(cloudPlatformModel.getDataCentreLocation());
+        page.chooseCommittedUsage(cloudPlatformModel.getCommittedUsage());
         page.addToEstimate();
     }
 }

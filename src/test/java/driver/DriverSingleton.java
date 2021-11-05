@@ -10,27 +10,33 @@ public class DriverSingleton
 {
     private static WebDriver driver;
 
+    private DriverSingleton() { }
+
     public static WebDriver getDriver()
     {
-        if (driver == null)
-        {
-            switch (System.getProperty("browser"))
-            {
-                case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    break;
-                case "edge":
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
-                    break;
-                default:
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    break;
-            }
-            driver.manage().window().maximize();
-        }
+        //------- Тестируем пока только на Хроме
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+
+//        if (driver == null)
+//        {
+//            switch (System.getProperty("browser"))
+//            {
+//                case "firefox":
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver = new FirefoxDriver();
+//                    break;
+//                case "edge":
+//                    WebDriverManager.edgedriver().setup();
+//                    driver = new EdgeDriver();
+//                    break;
+//                default:
+//                    WebDriverManager.chromedriver().setup();
+//                    driver = new ChromeDriver();
+//                    break;
+//            }
+//        }
+        driver.manage().window().maximize();
         return driver;
     }
 

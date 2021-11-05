@@ -1,59 +1,62 @@
 package test;
 
+import driver.DriverSingleton;
+import model.CloudPlatformModel;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.*;
+import service.CloudPlatformCreator;
 import steps.FillTheFormSteps;
 
 import java.util.ArrayList;
 
 public class GoogleCloudTest
 {
-    private WebDriver webDriver;
+    private WebDriver driver;
     private final String SEARCH_QUERY = "Google Cloud Platform Pricing Calculator";
 
     @BeforeMethod(alwaysRun = true)
-    public void openBrowser()
+    public void setupBrowser()
     {
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
+        driver = DriverSingleton.getDriver();
     }
 
     @Test
     public void startingSearch()
     {
-        GoogleCloudHomePage page = new GoogleCloudHomePage(webDriver);
+        GoogleCloudHomePage page = new GoogleCloudHomePage(driver);
         GoogleCloudPlatformPricingCalculatorPage pricingCalculatorPage = page.openPage().searchForTerm(SEARCH_QUERY).openCorrespondingResult();
 
-        FillTheFormSteps fillTheFormSteps = new FillTheFormSteps(webDriver, pricingCalculatorPage);
-        fillTheFormSteps.fillTheForm(4);
+        FillTheFormSteps fillTheFormSteps = new FillTheFormSteps(driver, pricingCalculatorPage);
+        CloudPlatformModel cloudPlatformModel = CloudPlatformCreator.createCloudPlatformWithCredentialsFromProperty();
+        fillTheFormSteps.fillTheForm(cloudPlatformModel);
 
-        GoogleCloudPlatformCalculatingResultsPage googleCloudPlatformCalculatingResultsPage = new GoogleCloudPlatformCalculatingResultsPage(webDriver);
+        GoogleCloudPlatformCalculatingResultsPage googleCloudPlatformCalculatingResultsPage = new GoogleCloudPlatformCalculatingResultsPage(driver);
+        String totalEstimatedCost = googleCloudPlatformCalculatingResultsPage.getTotalEstimatedCost();
+        System.out.println(totalEstimatedCost);
         GoogleCloudEmailEstimatePage googleCloudEmailEstimatePage = googleCloudPlatformCalculatingResultsPage.sendEstimateByEmail();
 
-        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.open()");
 
-        ArrayList<String> handles = new ArrayList<>(webDriver.getWindowHandles());
-        webDriver.switchTo().window(handles.get(1));
-        YopmailEmailGeneratorPage yopmailEmailGeneratorPage = new YopmailPage(webDriver).openPage().createEmail();
+        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(handles.get(1));
+        YopmailEmailGeneratorPage yopmailEmailGeneratorPage = new YopmailPage(driver).openPage().createEmail();
         String emailAddress = yopmailEmailGeneratorPage.getEmail();
-        webDriver.switchTo().window(handles.get(0));
+        driver.switchTo().window(handles.get(0));
         googleCloudEmailEstimatePage.sendEmail(emailAddress);
-        webDriver.switchTo().window(handles.get(1));
+        driver.switchTo().window(handles.get(1));
         String result = yopmailEmailGeneratorPage.checkEmail().getResultPriceFromEmail();
-        Assert.assertTrue(result.contains("1,085.25"));
+        Assert.assertTrue(result.contains(totalEstimatedCost));
     }
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser()
     {
-        webDriver.quit();
-        webDriver = null;
+        DriverSingleton.closeDriver();
     }
 }

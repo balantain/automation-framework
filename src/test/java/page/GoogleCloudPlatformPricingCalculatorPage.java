@@ -1,10 +1,12 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.XpathUtils;
 
 import java.time.Duration;
 
@@ -16,14 +18,14 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//label[contains(text(), \"Series\")]/..//md-select-value[@class='md-select-value']")
     private WebElement seriesField;
 
-    @FindBy(xpath = "//div[contains(text(), 'N1')]/..")
-    private WebElement seriesSelection;
+//    @FindBy(xpath = "//div[contains(text(), 'N1')]/..")
+//    private WebElement seriesSelection;
 
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//label[contains(text(), \"Machine type\")]/..//md-select-value[@class='md-select-value']")
     private WebElement machineTypeField;
 
-    @FindBy(xpath = "//div[contains(text(), 'n1-standard-8')]")
-    private WebElement getMachineTypeSelection;
+//    @FindBy(xpath = "//div[contains(text(), 'n1-standard-8')]")
+//    private WebElement getMachineTypeSelection;
 
     @FindBy(xpath = "//div[@class='ng-scope layout-row']//md-checkbox[@aria-label='Add GPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGPUCheckbox;
@@ -31,32 +33,32 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     @FindBy(xpath = "//md-select[@placeholder='Number of GPUs']")
     private WebElement numberOfGPUMenu;
 
-    @FindBy(xpath = "//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '1')]/..")
-    private WebElement numberOfGPUSelection;
+//    @FindBy(xpath = "//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '1')]/..")
+//    private WebElement numberOfGPUSelection;
 
     @FindBy(xpath = "//md-select[@placeholder='GPU type']")
     private WebElement gpuTypeMenu;
 
-    @FindBy(xpath = "//*[@value='NVIDIA_TESLA_V100']")
-    private WebElement gpuTypeSelection;
+//    @FindBy(xpath = "//div[contains(text(), 'NVIDIA Tesla V100')]/..")
+//    private WebElement gpuTypeSelection;
 
     @FindBy(xpath = "//md-select[@placeholder='Local SSD']")
     private WebElement localSSDMenu;
 
-    @FindBy(xpath = "//div[contains(text(), '2x375 GB')]" )
-    private WebElement getLocalSSDSelection;
+//    @FindBy(xpath = "//div[contains(text(), '2x375 GB')]" )
+//    private WebElement getLocalSSDSelection;
 
     @FindBy(xpath = "//md-select[contains(@placeholder, 'Datacenter location')]")
     private WebElement datacenterLocationMenu;
 
-    @FindBy(xpath = "//div[@class='md-select-menu-container cpc-region-select md-active md-clickable']//div[contains(text(), 'Frankfurt')]/..")
-    private WebElement getDatacenterLocationSelection;
+//    @FindBy(xpath = "//div[@class='md-select-menu-container cpc-region-select md-active md-clickable']//div[contains(text(), 'Frankfurt')]/..")
+//    private WebElement getDatacenterLocationSelection;
 
     @FindBy(xpath = "//md-select[contains(@placeholder, 'Committed usage')]")
     private WebElement committedUsageMenu;
 
-    @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '1 Year')]")
-    private WebElement getCommittedUsageSelection;
+//    @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '1 Year')]/..")
+//    private WebElement getCommittedUsageSelection;
 
     @FindBy(xpath = "//div[@class='compute-engine-block']//form[@name='ComputeEngineForm']//button[contains(text(), 'Add to Estimate')]")
     private WebElement addToEstimateButton;
@@ -71,16 +73,20 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         numberOfInstancesField.sendKeys(String.valueOf(numberOfInstances));
     }
 
-    public void chooseSeries()
+    public void chooseSeries(String series)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(seriesField)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(seriesSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
+                until(ExpectedConditions.visibilityOf(driver.findElement((By.
+                        xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", series)))))).click();
     }
 
-    public void chooseMachineType()
+    public void chooseMachineType(String machineType)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(machineTypeField)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(getMachineTypeSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.
+                        xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", machineType))))).click();
     }
 
     public void addGPUs()
@@ -88,34 +94,47 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(addGPUCheckbox)).click();
     }
 
-    public void addNumberOfGPUs()
+    public void addNumberOfGPUs(int numberOfGpu)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(numberOfGPUMenu)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(numberOfGPUSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions
+                .visibilityOf(driver.findElement(By.xpath(XpathUtils
+                .createSpecialXpath("//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '')]/..", String.valueOf(numberOfGpu)))))).click();
     }
 
-    public void addGPUTypes()
+    public void addGPUType(String gpuType)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(gpuTypeMenu)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(gpuTypeSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
+                until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", gpuType))))).click();
     }
 
-    public void addLocalSSD()
+    public void addLocalSSD(String localSSD)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(localSSDMenu)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(getLocalSSDSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions.visibilityOf(driver
+                .findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]", localSSD))))).click();
     }
 
-    public void addDataCenterLocation()
+    public void addDataCenterLocation(String dataCentreLocation)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(datacenterLocationMenu)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.elementToBeClickable(getDatacenterLocationSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions.visibilityOf(driver
+                .findElement(By.xpath(XpathUtils
+                .createSpecialXpath("//md-select-menu[@class='md-overflow']//div[contains(text(), '')]/..", dataCentreLocation))))).click();
     }
 
-    public void chooseCommittedUsage()
+    public void chooseCommittedUsage(String committedUsage)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(committedUsageMenu)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(getCommittedUsageSelection)).click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+                .until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath(XpathUtils
+                .createSpecialXpath("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '')]/..", committedUsage))))
+                .click();
     }
 
     public void addToEstimate()
