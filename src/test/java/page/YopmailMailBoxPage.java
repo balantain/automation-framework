@@ -26,6 +26,7 @@ public class YopmailMailBoxPage extends AbstractPage
 
     public String getResultPriceFromEmail()
     {
+        logger.info("Waiting for email...");
         for (int i = 0; i < 5; i++)
         {
             if (message.getText().contains("Этот почтовый ящик пуст"))
@@ -36,6 +37,8 @@ public class YopmailMailBoxPage extends AbstractPage
         }
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(mailFrame));
         driver.switchTo().frame(mailFrame);
-        return new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(mailTitle)).getText();
+        String mailTitleField = new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(mailTitle)).getText();
+        logger.info("Email with estimate is received");
+        return mailTitleField;
     }
 }

@@ -14,19 +14,10 @@ import steps.FillTheFormSteps;
 
 import java.util.ArrayList;
 
-public class GoogleCloudTest
+public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest
 {
-    private WebDriver driver;
-    private final String SEARCH_QUERY = "Google Cloud Platform Pricing Calculator";
-
-    @BeforeMethod(alwaysRun = true)
-    public void setupBrowser()
-    {
-        driver = DriverSingleton.getDriver();
-    }
-
     @Test
-    public void startingSearch()
+    public void cloudPlatformEstimateCanBeSentByEmail()
     {
         GoogleCloudHomePage page = new GoogleCloudHomePage(driver);
         GoogleCloudPlatformPricingCalculatorPage pricingCalculatorPage = page.openPage().searchForTerm(SEARCH_QUERY).openCorrespondingResult();
@@ -37,7 +28,9 @@ public class GoogleCloudTest
 
         GoogleCloudPlatformCalculatingResultsPage googleCloudPlatformCalculatingResultsPage = new GoogleCloudPlatformCalculatingResultsPage(driver);
         String totalEstimatedCost = googleCloudPlatformCalculatingResultsPage.getTotalEstimatedCost();
+
         System.out.println(totalEstimatedCost);
+
         GoogleCloudEmailEstimatePage googleCloudEmailEstimatePage = googleCloudPlatformCalculatingResultsPage.sendEstimateByEmail();
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -52,11 +45,5 @@ public class GoogleCloudTest
         driver.switchTo().window(handles.get(1));
         String result = yopmailEmailGeneratorPage.checkEmail().getResultPriceFromEmail();
         Assert.assertTrue(result.contains(totalEstimatedCost));
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void closeBrowser()
-    {
-        DriverSingleton.closeDriver();
     }
 }

@@ -1,0 +1,7 @@
+<suite name="Smoke">
+    <test name="GCPCEstimateTest">
+        <classes>
+            <class name="test.GoogleCloudPlatformCalculatorEstimateTest" />
+        </classes>
+    </test>
+</suite>

@@ -31,12 +31,9 @@ public class FillTheFormSteps
         page.fillInNumberOfInstances(cloudPlatformModel.getNumberOfInstances());
         page.chooseSeries(cloudPlatformModel.getMachineSeries());
         page.chooseMachineType(cloudPlatformModel.getMachineType());
-        if (cloudPlatformModel.isAddGPU())
-        {
-            page.addGPUs();
-            page.addNumberOfGPUs(cloudPlatformModel.getNumberOfGPU());
-            page.addGPUType(cloudPlatformModel.getGpuType());
-        }
+        page.addGPUs();
+        page.addNumberOfGPUs(cloudPlatformModel.getNumberOfGPU());
+        page.addGPUType(cloudPlatformModel.getGpuType());
         page.addLocalSSD(cloudPlatformModel.getLocalSSD());
         page.addDataCenterLocation(cloudPlatformModel.getDataCentreLocation());
         page.chooseCommittedUsage(cloudPlatformModel.getCommittedUsage());

@@ -20,6 +20,7 @@ public class GoogleCloudHomePage extends AbstractPage
     public GoogleCloudHomePage openPage()
     {
         driver.get(GOOGLE_CLOUD_URL);
+        logger.info("Google cloud main page is opened");
         return this;
     }
 
@@ -27,6 +28,7 @@ public class GoogleCloudHomePage extends AbstractPage
     {
         searchBtn.sendKeys(searchTerm);
         searchBtn.sendKeys(Keys.ENTER);
+        logger.info("Searching for term " + searchTerm);
         return new GoogleCloudSearchResultsPage(driver, searchTerm);
     }
 }

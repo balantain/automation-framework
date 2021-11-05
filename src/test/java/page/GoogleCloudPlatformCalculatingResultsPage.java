@@ -23,13 +23,16 @@ public class GoogleCloudPlatformCalculatingResultsPage extends AbstractPage
 
     public String getTotalEstimatedCost()
     {
-        return totalEstimatedCost.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
+        String totalEstimateCost = totalEstimatedCost.getText().replace("Total Estimated Cost: USD ", "").replace(" per 1 month", "");
+        logger.info("Total Estimated Cost is " + totalEstimateCost);
+        return totalEstimateCost;
     }
 
     public GoogleCloudEmailEstimatePage sendEstimateByEmail()
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.elementToBeClickable(emailEstimateButton)).click();
+        logger.info("Going to \"Send estimate by email\" block");
         return new GoogleCloudEmailEstimatePage(driver);
     }
 }

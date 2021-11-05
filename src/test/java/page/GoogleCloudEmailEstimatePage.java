@@ -35,5 +35,6 @@ public class GoogleCloudEmailEstimatePage extends AbstractPage
                 until(ExpectedConditions.visibilityOf(emailAddressField)).sendKeys(emailAddress);
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.elementToBeClickable(sendEmailBtn)).click();
+        logger.info("Sending email");
     }
 }

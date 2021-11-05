@@ -23,6 +23,7 @@ public class YopmailPage extends AbstractPage
     public YopmailPage openPage()
     {
         driver.get(YOPMAIL_URL);
+        logger.info("Yopmail page is opened");
         return this;
     }
 
@@ -30,6 +31,7 @@ public class YopmailPage extends AbstractPage
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.elementToBeClickable(emailGenerator)).click();
+        logger.info("Generating email");
         return new YopmailEmailGeneratorPage(driver);
     }
 }

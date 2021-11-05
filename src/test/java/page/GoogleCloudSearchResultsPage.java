@@ -24,6 +24,7 @@ public class GoogleCloudSearchResultsPage extends AbstractPage
     public GoogleCloudPlatformPricingCalculatorPage openCorrespondingResult()
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.elementToBeClickable(resultCalculator)).click();
+        logger.info("Corresponding result is opened");
         return new GoogleCloudPlatformPricingCalculatorPage(driver);
     }
 }

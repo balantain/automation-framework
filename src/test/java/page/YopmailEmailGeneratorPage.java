@@ -23,8 +23,11 @@ public class YopmailEmailGeneratorPage extends AbstractPage
 
     public String getEmail()
     {
-        return new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
+        String emailAddress = new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(email)).getText();
+        logger.info("Email address " + emailAddress + " is copied to clipboard");
+        return emailAddress;
+
     }
 
     public YopmailMailBoxPage checkEmail()

@@ -68,9 +68,10 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         super(driver);
     }
 
-    public void fillInNumberOfInstances(int numberOfInstances)
+    public void fillInNumberOfInstances(String numberOfInstances)
     {
-        numberOfInstancesField.sendKeys(String.valueOf(numberOfInstances));
+        numberOfInstancesField.sendKeys(numberOfInstances);
+        logger.info("Input number of instances: " + numberOfInstances);
     }
 
     public void chooseSeries(String series)
@@ -79,6 +80,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.visibilityOf(driver.findElement((By.
                         xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", series)))))).click();
+        logger.info("Input machine series " + series);
     }
 
     public void chooseMachineType(String machineType)
@@ -87,6 +89,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.
                         xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", machineType))))).click();
+        logger.info("Input machine type: " + machineType);
     }
 
     public void addGPUs()
@@ -94,13 +97,14 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(addGPUCheckbox)).click();
     }
 
-    public void addNumberOfGPUs(int numberOfGpu)
+    public void addNumberOfGPUs(String numberOfGpu)
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(numberOfGPUMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions
                 .visibilityOf(driver.findElement(By.xpath(XpathUtils
-                .createSpecialXpath("//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '')]/..", String.valueOf(numberOfGpu)))))).click();
+                .createSpecialXpath("//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '')]/..", numberOfGpu))))).click();
+        logger.info("Input number of GPU: " + numberOfGpu);
     }
 
     public void addGPUType(String gpuType)
@@ -108,6 +112,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(gpuTypeMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", gpuType))))).click();
+        logger.info("Input GPU type: " + gpuType);
     }
 
     public void addLocalSSD(String localSSD)
@@ -116,6 +121,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(driver
                 .findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]", localSSD))))).click();
+        logger.info("Input local SSD: " + localSSD);
     }
 
     public void addDataCenterLocation(String dataCentreLocation)
@@ -125,6 +131,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
                 .until(ExpectedConditions.visibilityOf(driver
                 .findElement(By.xpath(XpathUtils
                 .createSpecialXpath("//md-select-menu[@class='md-overflow']//div[contains(text(), '')]/..", dataCentreLocation))))).click();
+        logger.info("Input data center location: " + dataCentreLocation);
     }
 
     public void chooseCommittedUsage(String committedUsage)
@@ -135,10 +142,12 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
                 .xpath(XpathUtils
                 .createSpecialXpath("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '')]/..", committedUsage))))
                 .click();
+        logger.info("Input committed usage: " + committedUsage);
     }
 
     public void addToEstimate()
     {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.elementToBeClickable(addToEstimateButton)).click();
+        logger.info("Adding to estimate");
     }
 }

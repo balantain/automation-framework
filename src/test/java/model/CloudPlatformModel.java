@@ -4,36 +4,36 @@ import java.util.Objects;
 
 public class CloudPlatformModel
 {
-    private int numberOfInstances;
+    private String numberOfInstances;
     private String machineSeries;
     private String machineType;
-    private boolean addGPU;
-    private int numberOfGPU;
+    private String numberOfGPU;
     private String gpuType;
     private String localSSD;
     private String dataCentreLocation;
     private String committedUsage;
+    private String manualCalculatingCost;
 
-    public CloudPlatformModel(int numberOfInstances, String machineSeries, String machineType,
-                              boolean addGPU, int numberOfGPU, String gpuType, String localSSD,
-                              String dataCentreLocation, String committedUsage)
+    public CloudPlatformModel(String numberOfInstances, String machineSeries, String machineType,
+                              String numberOfGPU, String gpuType, String localSSD,
+                              String dataCentreLocation, String committedUsage, String manualCalculatingCost)
     {
         this.numberOfInstances = numberOfInstances;
         this.machineSeries = machineSeries;
         this.machineType = machineType;
-        this.addGPU = addGPU;
         this.numberOfGPU = numberOfGPU;
         this.gpuType = gpuType;
         this.localSSD = localSSD;
         this.dataCentreLocation = dataCentreLocation;
         this.committedUsage = committedUsage;
+        this.manualCalculatingCost = manualCalculatingCost;
     }
 
-    public int getNumberOfInstances() {
+    public String getNumberOfInstances() {
         return numberOfInstances;
     }
 
-    public void setNumberOfInstances(int numberOfInstances) {
+    public void setNumberOfInstances(String numberOfInstances) {
         this.numberOfInstances = numberOfInstances;
     }
 
@@ -53,19 +53,11 @@ public class CloudPlatformModel
         this.machineType = machineType;
     }
 
-    public boolean isAddGPU() {
-        return addGPU;
-    }
-
-    public void setAddGPU(boolean addGPU) {
-        this.addGPU = addGPU;
-    }
-
-    public int getNumberOfGPU() {
+    public String getNumberOfGPU() {
         return numberOfGPU;
     }
 
-    public void setNumberOfGPU(int numberOfGPU) {
+    public void setNumberOfGPU(String numberOfGPU) {
         this.numberOfGPU = numberOfGPU;
     }
 
@@ -101,26 +93,33 @@ public class CloudPlatformModel
         this.committedUsage = committedUsage;
     }
 
+    public String getManualCalculatingCost() {
+        return manualCalculatingCost;
+    }
+
+    public void setManualCalculatingCost(String manualCalculatingCost) {
+        this.manualCalculatingCost = manualCalculatingCost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CloudPlatformModel that = (CloudPlatformModel) o;
-        return numberOfInstances == that.numberOfInstances
-                && addGPU == that.addGPU
-                && numberOfGPU == that.numberOfGPU
+        return numberOfInstances.equals(that.numberOfInstances)
+                && numberOfGPU.equals(that.numberOfGPU)
                 && Objects.equals(machineSeries, that.machineSeries)
                 && Objects.equals(machineType, that.machineType)
                 && Objects.equals(gpuType, that.gpuType)
                 && Objects.equals(localSSD, that.localSSD)
                 && Objects.equals(dataCentreLocation, that.dataCentreLocation)
-                && Objects.equals(committedUsage, that.committedUsage);
+                && Objects.equals(committedUsage, that.committedUsage)
+                && Objects.equals(manualCalculatingCost, that.manualCalculatingCost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberOfInstances, machineSeries,
-                machineType, addGPU, numberOfGPU, gpuType,
-                localSSD, dataCentreLocation, committedUsage);
+        return Objects.hash(numberOfInstances, machineSeries, machineType, numberOfGPU, gpuType,
+                localSSD, dataCentreLocation, committedUsage, manualCalculatingCost);
     }
 }
