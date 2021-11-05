@@ -10,22 +10,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class GoogleCloudEmailEstimatePage extends AbstractPage
-{
+public class GoogleCloudEmailEstimatePage extends AbstractPage {
     @FindBy(xpath = "//input[@type='email']")
     private WebElement emailAddressField;
 
     @FindBy(xpath = "//button[@aria-label='Send Email']")
     private WebElement sendEmailBtn;
 
-    public GoogleCloudEmailEstimatePage(WebDriver driver)
-    {
+    public GoogleCloudEmailEstimatePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void sendEmail(String emailAddress)
-    {
+    public void sendEmail(String emailAddress) {
         driver.switchTo().defaultContent();
         driver.switchTo()
                 .frame(new WebDriverWait(driver, Duration.ofSeconds((WAITING_TIME)))
