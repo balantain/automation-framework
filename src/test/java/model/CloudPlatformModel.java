@@ -106,10 +106,10 @@ public class CloudPlatformModel
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CloudPlatformModel that = (CloudPlatformModel) o;
-        return numberOfInstances.equals(that.numberOfInstances)
-                && numberOfGPU.equals(that.numberOfGPU)
+        return Objects.equals(numberOfInstances, that.numberOfInstances)
                 && Objects.equals(machineSeries, that.machineSeries)
                 && Objects.equals(machineType, that.machineType)
+                && Objects.equals(numberOfGPU, that.numberOfGPU)
                 && Objects.equals(gpuType, that.gpuType)
                 && Objects.equals(localSSD, that.localSSD)
                 && Objects.equals(dataCentreLocation, that.dataCentreLocation)
