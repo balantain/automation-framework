@@ -13,10 +13,6 @@ public class DriverSingleton {
     }
 
     public static WebDriver getDriver() {
-//------- To test with Chrome on IDE
-//        WebDriverManager.chromedriver().setup();
-//        driver = new ChromeDriver();
-
         if (null == driver) {
             switch (System.getProperty("browser")) {
                 case "firefox": {
