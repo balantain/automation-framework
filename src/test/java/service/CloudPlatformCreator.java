@@ -2,8 +2,7 @@ package service;
 
 import model.CloudPlatformModel;
 
-public class CloudPlatformCreator
-{
+public class CloudPlatformCreator {
     private static final String NUMBER_OF_INSTANCES = "testData.cloudPlatform.instances";
     private static final String MACHINE_SERIES = "testData.cloudPlatform.machineSeries";
     private static final String MACHINE_TYPE = "testData.cloudPlatform.machineType";
@@ -14,8 +13,7 @@ public class CloudPlatformCreator
     private static final String COMMITTED_USAGE = "testData.cloudPlatform.committedUsage";
     private static final String MANUAL_CALCULATING_COST = "testData.cloudPlatform.manualCalculatingCost";
 
-    public static CloudPlatformModel createCloudPlatformWithCredentialsFromProperty()
-    {
+    public static CloudPlatformModel createCloudPlatformWithCredentialsFromProperty() {
         return new CloudPlatformModel(TestDataReader.getTestData(NUMBER_OF_INSTANCES),
                 TestDataReader.getTestData(MACHINE_SERIES),
                 TestDataReader.getTestData(MACHINE_TYPE),

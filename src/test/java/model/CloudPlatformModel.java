@@ -2,8 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class CloudPlatformModel
-{
+public class CloudPlatformModel {
     private String numberOfInstances;
     private String machineSeries;
     private String machineType;
@@ -16,8 +15,7 @@ public class CloudPlatformModel
 
     public CloudPlatformModel(String numberOfInstances, String machineSeries, String machineType,
                               String numberOfGPU, String gpuType, String localSSD,
-                              String dataCentreLocation, String committedUsage, String manualCalculatingCost)
-    {
+                              String dataCentreLocation, String committedUsage, String manualCalculatingCost) {
         this.numberOfInstances = numberOfInstances;
         this.machineSeries = machineSeries;
         this.machineType = machineType;

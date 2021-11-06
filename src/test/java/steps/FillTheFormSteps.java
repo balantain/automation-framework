@@ -9,19 +9,16 @@ import page.GoogleCloudPlatformPricingCalculatorPage;
 
 import java.time.Duration;
 
-public class FillTheFormSteps
-{
+public class FillTheFormSteps {
     private WebDriver driver;
     private GoogleCloudPlatformPricingCalculatorPage page;
 
-    public FillTheFormSteps(WebDriver driver, GoogleCloudPlatformPricingCalculatorPage page)
-    {
+    public FillTheFormSteps(WebDriver driver, GoogleCloudPlatformPricingCalculatorPage page) {
         this.driver = driver;
         this.page = page;
     }
 
-    public void fillTheForm(CloudPlatformModel cloudPlatformModel)
-    {
+    public void fillTheForm(CloudPlatformModel cloudPlatformModel) {
         driver.switchTo()
                 .frame(new WebDriverWait(driver, Duration.ofSeconds(page.getWAITING_TIME()))
                         .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"cloud-site\"]/devsite-iframe/iframe"))));

@@ -30,7 +30,7 @@ public class YopmailEmailGeneratorPage extends AbstractPage {
     }
 
     public YopmailMailBoxPage checkEmail() {
-        checkEmailButton.click();
+        new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(checkEmailButton)).click();
         logger.info("Going to mail box");
         return new YopmailMailBoxPage(driver);
     }

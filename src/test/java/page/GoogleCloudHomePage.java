@@ -6,28 +6,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class GoogleCloudHomePage extends AbstractPage
-{
+public class GoogleCloudHomePage extends AbstractPage {
     private final String GOOGLE_CLOUD_URL = "https://cloud.google.com/";
 
     @FindBy(name = "q")
     private WebElement searchBtn;
 
-    public GoogleCloudHomePage(WebDriver driver)
-    {
+    public GoogleCloudHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public GoogleCloudHomePage openPage()
-    {
+    public GoogleCloudHomePage openPage() {
         driver.get(GOOGLE_CLOUD_URL);
         logger.info("Google cloud main page is opened");
         return this;
     }
 
-    public GoogleCloudSearchResultsPage searchForTerm(String searchTerm)
-    {
+    public GoogleCloudSearchResultsPage searchForTerm(String searchTerm) {
         searchBtn.sendKeys(searchTerm);
         searchBtn.sendKeys(Keys.ENTER);
         logger.info("Searching for term " + searchTerm);

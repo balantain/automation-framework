@@ -9,22 +9,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class GoogleCloudSearchResultsPage extends AbstractPage
-{
+public class GoogleCloudSearchResultsPage extends AbstractPage {
     private String searchTerm;
 
     @FindBy(xpath = "//div[contains(@class, 'gsc-result')]//*[contains(text(), 'Google Cloud Platform Pricing Calculator')]")
     private WebElement resultCalculator;
 
-    public GoogleCloudSearchResultsPage(WebDriver driver, String searchTerm)
-    {
+    public GoogleCloudSearchResultsPage(WebDriver driver, String searchTerm) {
         super(driver);
         this.searchTerm = searchTerm;
         PageFactory.initElements(driver, this);
     }
 
-    public GoogleCloudPlatformPricingCalculatorPage openCorrespondingResult()
-    {
+    public GoogleCloudPlatformPricingCalculatorPage openCorrespondingResult() {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.elementToBeClickable(resultCalculator)).click();
         logger.info("Corresponding result is opened");
         return new GoogleCloudPlatformPricingCalculatorPage(driver);

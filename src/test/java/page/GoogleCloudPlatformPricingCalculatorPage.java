@@ -11,8 +11,7 @@ import utils.XpathUtils;
 
 import java.time.Duration;
 
-public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
-{
+public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//label[contains(text(), \"Number of instances\")]/.././/input[@name='quantity']")
     private WebElement numberOfInstancesField;
 
@@ -43,20 +42,17 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
     @FindBy(xpath = "//div[@class='compute-engine-block']//form[@name='ComputeEngineForm']//button[contains(text(), 'Add to Estimate')]")
     private WebElement addToEstimateButton;
 
-    public GoogleCloudPlatformPricingCalculatorPage(WebDriver driver)
-    {
+    public GoogleCloudPlatformPricingCalculatorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void fillInNumberOfInstances(String numberOfInstances)
-    {
+    public void fillInNumberOfInstances(String numberOfInstances) {
         numberOfInstancesField.sendKeys(String.valueOf(numberOfInstances));
         logger.info("Input number of instances: " + numberOfInstances);
     }
 
-    public void chooseSeries(String series)
-    {
+    public void chooseSeries(String series) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(seriesField)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.visibilityOf(driver.findElement((By.
@@ -64,8 +60,7 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         logger.info("Input machine series " + series);
     }
 
-    public void chooseMachineType(String machineType)
-    {
+    public void chooseMachineType(String machineType) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(machineTypeField)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.
@@ -73,61 +68,54 @@ public class GoogleCloudPlatformPricingCalculatorPage extends AbstractPage
         logger.info("Input machine type: " + machineType);
     }
 
-    public void addGPUs()
-    {
+    public void addGPUs() {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(addGPUCheckbox)).click();
     }
 
-    public void addNumberOfGPUs(String numberOfGpu)
-    {
+    public void addNumberOfGPUs(String numberOfGpu) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(numberOfGPUMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions
-                .visibilityOf(driver.findElement(By.xpath(XpathUtils
-                .createSpecialXpath("//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '')]/..", numberOfGpu))))).click();
+                        .visibilityOf(driver.findElement(By.xpath(XpathUtils
+                                .createSpecialXpath("//md-option[contains(@ng-repeat, 'GpuNumbers')]/div[contains(text(), '')]/..", numberOfGpu))))).click();
         logger.info("Input number of GPU: " + numberOfGpu);
     }
 
-    public void addGPUType(String gpuType)
-    {
+    public void addGPUType(String gpuType) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(gpuTypeMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).
                 until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]/..", gpuType))))).click();
         logger.info("Input GPU type: " + gpuType);
     }
 
-    public void addLocalSSD(String localSSD)
-    {
+    public void addLocalSSD(String localSSD) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(localSSDMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(driver
-                .findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]", localSSD))))).click();
+                        .findElement(By.xpath(XpathUtils.createSpecialXpath("//div[contains(text(), '')]", localSSD))))).click();
         logger.info("Input local SSD: " + localSSD);
     }
 
-    public void addDataCenterLocation(String dataCentreLocation)
-    {
+    public void addDataCenterLocation(String dataCentreLocation) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(datacenterLocationMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.visibilityOf(driver
-                .findElement(By.xpath(XpathUtils
-                .createSpecialXpath("//md-select-menu[@class='md-overflow']//div[contains(text(), '')]/..", dataCentreLocation))))).click();
+                        .findElement(By.xpath(XpathUtils
+                                .createSpecialXpath("//md-select-menu[@class='md-overflow']//div[contains(text(), '')]/..", dataCentreLocation))))).click();
         logger.info("Input data center location: " + dataCentreLocation);
     }
 
-    public void chooseCommittedUsage(String committedUsage)
-    {
+    public void chooseCommittedUsage(String committedUsage) {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(committedUsageMenu)).click();
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME))
                 .until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath(XpathUtils
-                .createSpecialXpath("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '')]/..", committedUsage))))
+                        .xpath(XpathUtils
+                                .createSpecialXpath("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(), '')]/..", committedUsage))))
                 .click();
         logger.info("Input committed usage: " + committedUsage);
     }
 
-    public void addToEstimate()
-    {
+    public void addToEstimate() {
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.elementToBeClickable(addToEstimateButton)).click();
         logger.info("Adding to estimate");
     }

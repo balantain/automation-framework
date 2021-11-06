@@ -1,6 +1,5 @@
 package page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,10 +27,9 @@ public class YopmailMailBoxPage extends AbstractPage {
     public String getResultPriceFromEmail() {
         logger.info("Waiting for email...");
         for (int i = 0; i < 5; i++) {
-            if (message.getText().contains("Этот почтовый ящик пуст")){
+            if (message.getText().contains("Этот почтовый ящик пуст")) {
                 driver.navigate().refresh();
-            }
-            else break;
+            } else break;
         }
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(mailFrame));
         logger.info("mail frame is visible");

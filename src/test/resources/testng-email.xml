@@ -1,0 +1,7 @@
+<suite name="Email">
+    <test name="GCPCEmailTest" verbose="1">
+        <classes>
+            <class name="test.GoogleCloudPlatformCalculatorEmailTest"/>
+        </classes>
+    </test>
+</suite>

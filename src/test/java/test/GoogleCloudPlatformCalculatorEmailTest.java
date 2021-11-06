@@ -10,11 +10,9 @@ import steps.FillTheFormSteps;
 
 import java.util.ArrayList;
 
-public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest
-{
+public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest {
     @Test
-    public void cloudPlatformEstimateCanBeSentByEmail()
-    {
+    public void cloudPlatformEstimateCanBeSentByEmail() {
         GoogleCloudHomePage page = new GoogleCloudHomePage(driver);
         GoogleCloudPlatformPricingCalculatorPage pricingCalculatorPage = page.openPage().searchForTerm(SEARCH_QUERY).openCorrespondingResult();
 
@@ -40,7 +38,10 @@ public class GoogleCloudPlatformCalculatorEmailTest extends CommonTest
         googleCloudEmailEstimatePage.sendEmail(emailAddress);
 
         driver.switchTo().window(handles.get(1));
-        String result = yopmailEmailGeneratorPage.checkEmail().getResultPriceFromEmail();
+
+        YopmailMailBoxPage yopmailMailBoxPage = yopmailEmailGeneratorPage.checkEmail();
+
+        String result = yopmailMailBoxPage.getResultPriceFromEmail();
         Assert.assertTrue(result.contains(totalEstimatedCost));
     }
 }

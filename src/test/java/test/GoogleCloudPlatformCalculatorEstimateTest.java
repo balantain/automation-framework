@@ -7,11 +7,9 @@ import page.*;
 import service.CloudPlatformCreator;
 import steps.FillTheFormSteps;
 
-public class GoogleCloudPlatformCalculatorEstimateTest extends CommonTest
-{
+public class GoogleCloudPlatformCalculatorEstimateTest extends CommonTest {
     @Test
-    public void cloudPlatformEstimateIsEqualToManualCalculated()
-    {
+    public void cloudPlatformEstimateIsEqualToManualCalculated() {
         GoogleCloudHomePage page = new GoogleCloudHomePage(driver);
         GoogleCloudPlatformPricingCalculatorPage pricingCalculatorPage = page.openPage().searchForTerm(SEARCH_QUERY).openCorrespondingResult();
 
