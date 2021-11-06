@@ -19,6 +19,9 @@ public class YopmailMailBoxPage extends AbstractPage {
     @FindBy(xpath = "//div[@id='message']")
     private WebElement message;
 
+    @FindBy(xpath = "//button[@id='refresh']")
+    private WebElement refreshButton;
+
     public YopmailMailBoxPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -28,7 +31,7 @@ public class YopmailMailBoxPage extends AbstractPage {
         logger.info("Waiting for email...");
         for (int i = 0; i < 5; i++) {
             if (message.getText().contains("Этот почтовый ящик пуст")) {
-                driver.navigate().refresh();
+                refreshButton.click();
             } else break;
         }
         new WebDriverWait(driver, Duration.ofSeconds(WAITING_TIME)).until(ExpectedConditions.visibilityOf(mailFrame));
