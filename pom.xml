@@ -69,7 +69,6 @@
                 <configuration>
 	         <suiteXmlFiles>
 	                  <suiteXmlFile>src\test\resources\testng-smoke.xml</suiteXmlFile>
-			  <suiteXmlFile>src\test\resources\testng-email.xml</suiteXmlFile>
 	         </suiteXmlFiles>
                 </configuration>
             </plugin>
